@@ -15,3 +15,10 @@ RUN apt-get install -y python3 && ln -s /usr/bin/python3 /usr/bin/python
 
 RUN apt-get install -y python3-pip
 RUN pip install opencv-python
+
+RUN apt-get install ffmpeg libsm6 libxext6  -y
+
+WORKDIR /run
+COPY scripts/extract_images.py .
+RUN chmod +x extract_images.py
+ENTRYPOINT [ "python", "/run/extract_images.py" ]
